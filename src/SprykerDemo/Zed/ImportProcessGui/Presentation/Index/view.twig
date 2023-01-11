@@ -1,0 +1,36 @@
+{% extends '@Gui/Layout/layout.twig' %}
+
+{% set widget_title = 'Import Process #' ~ idImportProcess | trans %}
+{% block section_title %}{{ widget_title }}{% endblock %}
+
+{% block action %}
+    {{ backActionButton('/import-process-gui', 'List Processes' | trans) }}
+{% endblock %}
+
+{% block content %}
+    {% embed '@Gui/Partials/widget.twig' with { widget_title: 'Import status' | trans } %}
+        {% block widget_content %}
+            {% if importProcess %}
+                {% if importProcess.status == 'created' %}
+                    <input type="button" class="btn btn-primary btn-w-m" value="{{ 'Refresh status' }}" id="refresh-status-button" data-id="{{ importProcess.idImportProcess }}">
+                {% endif %}
+                <div id="process-status-container">
+                    {% include '@ImportProcessGui/Index/view-status.twig' %}
+                </div>
+            {% else %}
+                <strong>Import process not found</strong>
+            {% endif %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block head_css %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ assetsPath('css/import-process-gui.css') }}" />
+{% endblock %}
+
+{% block footer_js %}
+    {{ parent() }}
+    <script src="{{ assetsPath('js/import-process-gui.js') }}"></script>
+{% endblock %}
+

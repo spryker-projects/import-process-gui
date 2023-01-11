@@ -1,0 +1,25 @@
+<div id="process-status-data" data-status="{{ importProcess.status }}"></div>
+<div class="well">
+    <strong>{{ 'Current status' | trans }}</strong>: <span class="label {{ labelClass }}">{{ importProcess.status | capitalize | trans }}</span>
+</div>
+{% if importProcess.importReport %}
+    <div class="flash-messages">
+        {% for message in importProcess.importReport.messages %}
+            {% if message.isSuccess %}
+                <div class="alert alert-success">
+                    <i class="far fa-check-circle alert__icon"></i>
+                    <div class="alert__text">
+                        {{ message.message | trans }}
+                    </div>
+                </div>
+            {% else %}
+                <div class="alert alert-danger">
+                    <i class="fas fa-ban alert__icon"></i>
+                    <div class="alert__text">
+                        {{ message.message | trans }}
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endif %}
