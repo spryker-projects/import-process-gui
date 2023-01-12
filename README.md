@@ -7,7 +7,7 @@ CategoryExporter contains the client to read categories from key-value storage.
 ## Installation
 
 ```
-composer require spryker-demo/import-process-gui
+composer require spryker-projects/import-process-gui
 ```
 
 ## Configuration
